@@ -34,7 +34,7 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-			<!-- Make sure you can exec this JAR: java -jar myapp.jar -->
+			<!-- Make sure you can exec this JAR:  java -jar myapp.jar -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
