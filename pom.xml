@@ -35,18 +35,34 @@
 				</configuration>
 			</plugin>
 			<!-- Make sure you can exec this JAR:  java -jar myapp.jar -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>lv.div.project.Main</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
+                        <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-assembly-plugin</artifactId>
+                                <version>2.4.1</version>
+                                <configuration>
+                                        <!-- get all project dependencies -->
+                                        <descriptorRefs>
+                                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                                        </descriptorRefs>
+                                        <finalName>${project.artifactId}</finalName>
+                                        <appendAssemblyId>false</appendAssemblyId>
+                                        <archive>
+                                                <manifest>
+                                                        <mainClass>lv.div.project.Main</mainClass>
+                                                </manifest>
+                                        </archive>
+                                </configuration>
+                                <executions>
+                                        <execution>
+                                                <id>make-assembly</id>
+                                                <!-- bind to the packaging phase -->
+                                                <phase>package</phase>
+                                                <goals>
+                                                        <goal>single</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
+                        </plugin>
 		</plugins>
 	</build>
 </project>
