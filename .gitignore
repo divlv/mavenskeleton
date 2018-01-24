@@ -1,0 +1,10 @@
+#
+# Do not commit the following:
+#
+#
+target
+*.bak
+bin
+
+# ...except the .gitignore itself
+!.gitignore

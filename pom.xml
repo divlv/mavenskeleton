@@ -6,6 +6,12 @@
 	<name>${project.artifactId}</name>
 	<packaging>jar</packaging>
 	<dependencies>
+		<!-- Many apps needs this log4j. Uncomment if needed -->
+		<!--dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency-->
 		<dependency>
 			<!-- Everybody wants this... ;-) -->
 			<groupId>junit</groupId>
@@ -34,35 +40,58 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-			<!-- Make sure you can exec this JAR:  java -jar myapp.jar -->
-                        <plugin>
-                                <groupId>org.apache.maven.plugins</groupId>
-                                <artifactId>maven-assembly-plugin</artifactId>
-                                <version>2.4.1</version>
-                                <configuration>
-                                        <!-- get all project dependencies -->
-                                        <descriptorRefs>
-                                                <descriptorRef>jar-with-dependencies</descriptorRef>
-                                        </descriptorRefs>
-                                        <finalName>${project.artifactId}</finalName>
-                                        <appendAssemblyId>false</appendAssemblyId>
-                                        <archive>
-                                                <manifest>
-                                                        <mainClass>lv.div.project.Main</mainClass>
-                                                </manifest>
-                                        </archive>
-                                </configuration>
-                                <executions>
-                                        <execution>
-                                                <id>make-assembly</id>
-                                                <!-- bind to the packaging phase -->
-                                                <phase>package</phase>
-                                                <goals>
-                                                        <goal>single</goal>
-                                                </goals>
-                                        </execution>
-                                </executions>
-                        </plugin>
+			<!-- Adding application resources -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- ... and make sure you can exec this JAR:  java -jar myapp.jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<!-- get all project dependencies -->
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<finalName>${project.artifactId}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<archive>
+						<manifest>
+							<mainClass>lv.div.project.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<!-- bind to the packaging phase -->
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

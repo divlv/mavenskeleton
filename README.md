@@ -1,5 +1,5 @@
 # Maven Skeleton Template
-Clean Maven template skeleton project. Creates **executable JAR** file
+Clean Maven template skeleton project. Creates **executable JAR** file with dependencies and resources
 
 Grab and use this template to quickly create the empty maven JAR project.
 
